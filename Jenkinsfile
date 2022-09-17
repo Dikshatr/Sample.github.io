@@ -19,11 +19,5 @@ pipeline {
         }
     }
     
-    post 
-    {  
-        always
-        {
-            emailext body: 'Build Pipeline Success', recipientProviders: [developers()], subject: 'Build Pipeline Success', to: 'diksha1999tripathi@gmail.com'
-        }
-    }
+   
 }
