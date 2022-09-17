@@ -23,7 +23,7 @@ pipeline {
     {  
         always
         {
-            emailext body: 'Build Pipeline Success', subject: 'Build Pipeline Success', to: 'diksha1999tripathi@gmail.com'
+            error 'Successful build '
         }
     }
 }
