@@ -1,37 +1,16 @@
-pipeline {
-    agent any
-
-    stages {
-        
-       /* stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
-
-        checkout scm
-    }*/
-        stage('Build') {
-            steps {
-             app = docker build("dikshatrdocker/sampledocker")
-           
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-                sh 'sudo docker login -u "dikshatrdocker" -p "dckr_pat_pfOXrr0oNmCtxMnF6YiS819_FS0" docker.io'
-               
-        app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        
-            }
-        }
-        
- 
+node {   
+    stage('Clone repository') {
+        git credentialsId: 'git', url: 'https://github.com/Dikshatr/Sample.github.io.git'
     }
     
-   
+    stage('Build image') {
+       dockerImage = docker.build("dikshatrdocker/sampledocker")
+    }
+    
+
+stage('Push image') {
+        withDockerRegistry([ credentialsId: "docker", url: "https://hub.docker.com/repository/docker/dikshatrdocker/sampledocker" ]) {
+        dockerImage.push()
+        }
+    }    
 }
