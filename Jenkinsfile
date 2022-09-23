@@ -10,7 +10,7 @@ pipeline {
     }*/
         stage('Build') {
             steps {
-             app = docker.build("dikshatrdocker/sampledocker")
+             app = docker build("dikshatrdocker/sampledocker")
            
             }
         }
