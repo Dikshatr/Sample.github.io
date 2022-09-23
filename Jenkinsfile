@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
         
-        dockerImage = docker build ("dikshatrdocker/sampledocker:latest")
+        dockerImage = docker . build ("dikshatrdocker/sampledocker:latest")
         
     }
 
